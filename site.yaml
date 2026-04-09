@@ -1,0 +1,19 @@
+branding:
+  accent: '#00d4aa'
+  primary: '#4a63e7'
+  secondary: '#6c63ff'
+careers:
+  label: Your Next Role
+  show_apply_form: true
+  submit_url: ''
+chatbot:
+  booking_api: ''
+  booking_enabled: true
+  mode: llm
+  platform: anythingllm
+company:
+  name: NexusPoint Systems
+  slug: nexuspoint-systems
+  tagline: Connecting Business to What's Next
+layout: sidebar
+theme: tech-dark

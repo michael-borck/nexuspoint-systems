@@ -1,0 +1,281 @@
+```yaml
+---
+title: Cloud Migration Planning Guide
+slug: cloud-migration-planning-guide
+category: support
+---
+
+# Cloud Migration Planning Guide
+
+**Document Version:** 2.3  
+**Last Updated:** September 2024  
+**Owner:** Liam Foster, Senior Solutions Architect  
+**Review Cycle:** Quarterly  
+
+## Overview
+
+This guide provides NexusPoint Systems technical staff with standardised procedures for scoping, planning, and executing cloud migration projects. Following recent updates to our security-first approach, all migrations must now incorporate enhanced security assessments and compliance considerations from the initial scoping phase.
+
+**Note:** This document is currently being updated to reflect our new security-first methodology. Some sections reference legacy processes that are being phased out by Q1 2025.
+
+## Pre-Migration Assessment Framework
+
+### Client Discovery Workshop (CDW)
+
+All cloud migration projects begin with a structured Client Discovery Workshop, typically conducted over 2-3 sessions. The workshop template is maintained in our SharePoint under `/Templates/CDW_Template_v4.2.xlsx`.
+
+**Workshop Participants (Client Side):**
+- IT Manager/Director
+- Finance stakeholder (for budgeting approval)
+- Key application owners
+- Compliance officer (if applicable)
+
+**Workshop Participants (NexusPoint):**
+- Solutions Architect (lead)
+- Service Delivery representative
+- Cybersecurity Lead (mandatory since July 2024)
+
+### Infrastructure Inventory
+
+Use the NexusPoint Asset Discovery Tool (NADT) for automated inventory collection. Manual verification is still required for:
+- Legacy applications without SNMP support
+- Air-gapped systems
+- Shadow IT discovered during interviews
+
+**Current NADT Limitations:**
+- Cannot detect Oracle licensing on virtualised environments
+- Requires manual input for SaaS application usage
+- Network mapping functionality still in beta (expected production release Nov 2024)
+
+### Application Portfolio Assessment
+
+Classify applications using the standard 6R framework:
+
+1. **Retire** - End-of-life applications (typically 15-20% of portfolio)
+2. **Retain** - Keep on-premises due to compliance/performance requirements
+3. **Rehost** - Lift-and-shift migration (fastest path, 60-70% of applications)
+4. **Replatform** - Minor optimisations during migration
+5. **Refactor** - Significant code changes for cloud-native benefits
+6. **Replace** - Migrate to SaaS equivalent
+
+**Security Considerations (Updated Sept 2024):**
+Marcus Webb's security team must review all applications classified as "Retain" or "Rehost" to ensure appropriate security controls are maintained post-migration. This adds approximately 3-5 business days to the assessment phase but is non-negotiable for compliance reasons.
+
+## Architecture Design Phase
+
+### Cloud Platform Selection
+
+**Primary Recommendations:**
+- **Azure** (70% of our projects) - Strong hybrid capabilities, good for clients with existing Microsoft licensing
+- **AWS** (25% of projects) - Best for clients requiring advanced analytics or machine learning capabilities  
+- **Google Cloud** (5% of projects) - Primarily for clients with specific data analytics requirements
+
+**Selection Criteria Matrix:**
+- Existing licensing agreements (weight: 30%)
+- Technical requirements (weight: 25%)
+- Compliance requirements (weight: 20%)
+- Budget constraints (weight: 15%)
+- Internal NexusPoint expertise (weight: 10%)
+
+### Network Architecture
+
+All cloud migrations must include:
+- Site-to-site VPN or ExpressRoute/Direct Connect
+- Network segmentation following zero-trust principles
+- DDoS protection (minimum Standard tier)
+- Web Application Firewall for internet-facing applications
+
+**Standard Subnetting Convention:**
+- Management subnet: 10.0.1.0/24
+- Application tier: 10.0.10.0/23
+- Database tier: 10.0.20.0/24
+- DMZ: 10.0.100.0/24
+
+### Security Architecture (Updated Process)
+
+Following our security-first pivot, all migrations now require:
+
+1. **Identity and Access Management (IAM) Design**
+   - Multi-factor authentication for all administrative access
+   - Role-based access control (RBAC) implementation
+   - Integration with existing Active Directory where possible
+
+2. **Data Protection Strategy**
+   - Encryption at rest and in transit (non-negotiable)
+   - Key management strategy using cloud-native HSMs
+   - Data classification and handling procedures
+
+3. **Monitoring and Logging**
+   - Centralised logging to SIEM platform
+   - Real-time alerting for security events
+   - Compliance reporting automation
+
+**Note:** Our SIEM platform (Splunk Enterprise) is being replaced with Microsoft Sentinel in Q4 2024. New projects should plan for Sentinel integration rather than Splunk.
+
+## Migration Execution Framework
+
+### Wave Planning
+
+Migrations are typically executed in 3-4 waves:
+
+**Wave 1 - Foundation Services (Weeks 1-3)**
+- Active Directory/identity services
+- DNS and core networking
+- Monitoring and backup infrastructure
+- Security tooling deployment
+
+**Wave 2 - Non-Critical Applications (Weeks 4-8)**
+- Development/test environments
+- Internal-facing applications with minimal business impact
+- File shares and collaboration tools
+
+**Wave 3 - Business-Critical Applications (Weeks 9-14)**
+- ERP systems
+- Customer-facing applications
+- Core business databases
+- Email systems (if not already cloud-hosted)
+
+**Wave 4 - Specialised Systems (Weeks 15-18)**
+- Legacy applications requiring significant testing
+- Applications with complex dependencies
+- Compliance-sensitive workloads
+
+### Cutover Procedures
+
+**Standard Cutover Window:** Saturday 10:00 PM - Sunday 8:00 AM (AWST)
+
+**Pre-Cutover Checklist (T-7 days):**
+- [ ] Final backup verification
+- [ ] DNS changes prepared (but not applied)
+- [ ] Load balancer configurations tested
+- [ ] Rollback procedures documented and tested
+- [ ] Client stakeholder notification sent
+- [ ] On-call engineers identified
+
+**Cutover Communication Protocol:**
+- T-1 hour: Client notification of cutover commencement
+- T+30 minutes: Initial health check report
+- T+2 hours: Detailed functionality verification
+- T+4 hours: User acceptance testing begins
+- T+8 hours: Cutover completion notification
+
+### Post-Migration Validation
+
+**Technical Validation (Week 1):**
+- Application performance baseline establishment
+- Security posture verification
+- Backup and disaster recovery testing
+- Cost optimisation review
+
+**Business Validation (Weeks 2-4):**
+- User training completion
+- Business process verification
+- Performance SLA validation
+- Cost tracking against budget
+
+## Risk Management
+
+### Common Migration Risks
+
+1. **Data Loss/Corruption** (Probability: Medium, Impact: High)
+   - Mitigation: Triple backup verification, staged data sync
+   
+2. **Extended Downtime** (Probability: Low, Impact: High)  
+   - Mitigation: Comprehensive rollback procedures, parallel running where possible
+
+3. **Security Configuration Errors** (Probability: Medium, Impact: High)
+   - Mitigation: Mandatory security review checkpoints, automated configuration scanning
+
+4. **Cost Overruns** (Probability: High, Impact: Medium)
+   - Mitigation: Weekly cost monitoring, automated budget alerts
+
+5. **User Adoption Issues** (Probability: Medium, Impact: Medium)
+   - Mitigation: Change management planning, comprehensive training program
+
+### Escalation Procedures
+
+**Level 1:** Technical issues resolved by project team  
+**Level 2:** Issues requiring senior architect involvement (Liam Foster)  
+**Level 3:** Issues requiring service delivery management (Priya Sharma)  
+**Level 4:** Client relationship issues requiring MD involvement (Alex Nguyen)
+
+## Cost Management
+
+### Pricing Models
+
+**Migration Services:**
+- Discovery and Assessment: $8,000 - $15,000 (depending on complexity)
+- Architecture Design: $12,000 - $25,000
+- Migration Execution: $150-$300 per server (varies by complexity)
+- Post-migration optimisation: 15-20% of migration cost
+
+**Ongoing Management:**
+- Infrastructure monitoring: $45/server/month
+- Security monitoring: $65/server/month (new pricing effective Oct 2024)
+- Application support: Variable based on SLA tier
+
+### Budget Tracking
+
+Use the project costing template in `/Finance/Migration_Costing_Template_v3.1.xlsx`. Weekly cost reviews are mandatory for projects >$50k value.
+
+**Cost Optimisation Checkpoints:**
+- Week 2: Resource right-sizing review
+- Week 6: Reserved instance analysis
+- Week 12: Auto-scaling configuration review
+- Quarterly: Comprehensive cost optimisation assessment
+
+## Tools and Resources
+
+### Internal Tools
+- **NexusPoint Asset Discovery Tool (NADT)** - Automated inventory collection
+- **Migration Project Tracker** - SharePoint-based project management
+- **Cost Monitoring Dashboard** - Power BI integration with cloud billing APIs
+
+### Partner Tools
+- **Microsoft Assessment and Planning Toolkit** - Azure migrations
+- **AWS Migration Hub** - AWS migration tracking
+- **Carbonite Migrate** - Application-consistent migrations
+- **Zerto** - Disaster recovery and migration platform
+
+### Documentation Templates
+- Client Discovery Workshop template
+- Technical Architecture Document template
+- Migration Runbook template
+- Post-migration Handover Document template
+
+All templates are maintained in SharePoint under `/Templates/Migration/` and are version-controlled.
+
+## Quality Assurance
+
+### Peer Review Process
+
+All migration plans >$30k value require peer review by:
+1. Another Solutions Architect (technical review)
+2. Marcus Webb or designate (security review)
+3. Tanya Brooks (commercial and risk review)
+
+### Client Sign-off Requirements
+
+**Mandatory Approval Points:**
+- Discovery workshop summary
+- Technical architecture design
+- Migration schedule and wave planning  
+- Go/no-go decision 48 hours before cutover
+- Post-migration acceptance
+
+### Lessons Learned Process
+
+Post-project retrospectives are conducted within 30 days of project completion. Findings are incorporated into quarterly updates to this document and our migration methodology.
+
+**Recent Lessons Learned (Q3 2024):**
+- Extended testing periods required for applications with complex authentication
+- Earlier engagement with cybersecurity team reduces project delays
+- Automated cost monitoring prevents budget surprises
+
+---
+
+**Document Control:**
+- Next Review Date: December 2024
+- Change Requests: Submit via ServiceNow (Category: Documentation)
+- Questions: Contact Liam Foster (liam.foster@nexuspoint.com.au)
+```
