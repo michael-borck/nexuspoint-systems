@@ -390,12 +390,22 @@ jobs:
     employment_type: "Full-time"
     reports_to: "Marcus Webb"
     brief: "Entry-level security role. Monitoring SIEM alerts, assisting with vulnerability assessments, helping maintain client security postures. Ideal for a graduate with foundational security knowledge."
+    additional_postings:
+      - agency: "PerthTalent Recruitment"
+        title: "Junior Cybersecurity Analyst | Growing Perth MSP"
+        confidential: false
+        description: "Our valued client NexusPoint Systems is seeking a Junior Cybersecurity Analyst to join their expanding security practice. This is a fantastic opportunity for a recent graduate to work alongside experienced practitioners on real client engagements. The successful candidate will support SIEM monitoring, vulnerability assessments, and incident response activities."
 
   - title: "Service Desk Analyst"
     department: "Service Delivery"
     employment_type: "Full-time"
     reports_to: "Sam Okoro"
     brief: "Tier 1 support analyst handling client tickets, Microsoft 365 admin, basic troubleshooting. Suits an IT graduate who enjoys helping people solve problems."
+    additional_postings:
+      - agency: "Catalyst People Solutions"
+        title: "IT Support Analyst — Confidential WA Tech Firm"
+        confidential: true
+        description: "Our client, a leading Perth-based managed IT services provider, is seeking an IT Support Analyst to join their service delivery team. The successful candidate will handle Tier 1 and Tier 2 support tickets, manage Microsoft 365 environments, and contribute to client satisfaction metrics. Confidential listing — full company details disclosed at interview stage."
 
   - title: "Cloud Infrastructure Intern"
     department: "Solutions Architecture"
