@@ -1,0 +1,88 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Services — NexusPoint Systems{% endblock %}
+
+{% block content %}
+<section class="section-pad">
+    <div class="wrap">
+        <p class="eyebrow">Services</p>
+        <h1 style="max-width: 18ch; margin-bottom: var(--np-px-5);">Six things we do, all of them properly.</h1>
+        <p class="lead" style="max-width: 60ch; font-size: 1.35rem;">No vague capability statements. Six well-defined services we operate every day for 120+ Western Australian organisations.</p>
+    </div>
+</section>
+
+<section class="section-pad-sm" style="background: var(--np-bg-2); border-top: 1px solid var(--np-line); border-bottom: 1px solid var(--np-line);">
+    <div class="wrap">
+        <div class="cap-grid">
+            {% for svc in (profile.services or [])[:6] %}
+            <article class="cap">
+                <div class="cap-num">SVC_{{ "%02d"|format(loop.index) }}</div>
+                <h3 style="font-size: 1.25rem;">{{ svc }}</h3>
+                <p>Delivered under our standard managed services agreement with 24/7 monitoring, defined SLAs, and quarterly reviews.</p>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="metrics">
+    <div class="wrap">
+        <div class="metrics-header">
+            <h2>Operational at scale.</h2>
+            <p class="label">// SERVICE_TELEMETRY</p>
+        </div>
+        <div class="metrics-grid">
+            <div class="metric accent">
+                <div class="metric-label">Endpoints monitored</div>
+                <div class="metric-value">4,832</div>
+                <div class="metric-unit">Across client base</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Tickets resolved /mo</div>
+                <div class="metric-value">2,140</div>
+                <div class="metric-unit">L1 + L2</div>
+            </div>
+            <div class="metric">
+                <div class="metric-label">Cloud migrations</div>
+                <div class="metric-value">38</div>
+                <div class="metric-unit">Last 24 months</div>
+            </div>
+            <div class="metric accent">
+                <div class="metric-label">Security assessments</div>
+                <div class="metric-value">62</div>
+                <div class="metric-unit">FY26 to date</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-pad">
+    <div class="wrap">
+        <div class="section-header">
+            <div>
+                <p class="eyebrow">How we operate</p>
+                <h2>Four principles. Non-negotiable.</h2>
+            </div>
+            <p class="lead">If a vendor pitch sounds too good to be true, it usually is. We'd rather over-deliver on a smaller commitment than over-promise on a bigger one.</p>
+        </div>
+
+        <div class="cap-grid">
+            <article class="cap">
+                <div class="cap-num">P_01</div>
+                <h3>Right-sized engagements</h3>
+                <p>We turn down projects we can't deliver on time. Our existing clients come first, every time.</p>
+            </article>
+            <article class="cap">
+                <div class="cap-num">P_02</div>
+                <h3>Documented as we go</h3>
+                <p>Every environment we manage is documented. When the on-call engineer answers your alert, they have the context.</p>
+            </article>
+            <article class="cap">
+                <div class="cap-num">P_03</div>
+                <h3>Security by default</h3>
+                <p>Our managed services include the Essential Eight controls baseline. You don't have to ask for security — it's there from day one.</p>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}

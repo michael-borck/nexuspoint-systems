@@ -1,0 +1,31 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Staff portal — NexusPoint Systems{% endblock %}
+
+{% block content %}
+<section class="section-pad">
+    <div class="wrap">
+        <p class="eyebrow">Staff portal / Internal</p>
+        <h1 style="margin-bottom: var(--np-px-5);">Welcome back.</h1>
+        <p class="lead" style="font-size: 1.2rem;">Quick links to the systems and people you work with every day.</p>
+
+        <div class="cap-grid" style="margin-top: var(--np-px-6);">
+            <a href="/staff/directory.html" class="cap" style="text-decoration: none;">
+                <div class="cap-num">PORTAL_01 / PEOPLE</div>
+                <h3>Directory</h3>
+                <p>Find a colleague, reach the right manager, chat with key staff via the embedded assistants.</p>
+            </a>
+            <a href="/staff/documents.html" class="cap" style="text-decoration: none;">
+                <div class="cap-num">PORTAL_02 / DOCS</div>
+                <h3>Documents</h3>
+                <p>Onboarding checklists, escalation procedures, security policies, and BYOD requirements.</p>
+            </a>
+            <a href="#" class="cap" style="text-decoration: none;">
+                <div class="cap-num">PORTAL_03 / NOC</div>
+                <h3>Operations dashboard</h3>
+                <p>Live SLA telemetry, ticket queues, and the current on-call rotation. Coming soon.</p>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

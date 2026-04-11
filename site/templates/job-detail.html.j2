@@ -1,0 +1,60 @@
+{% extends "base.html.j2" %}
+
+{% block title %}{{ job.title }} — NexusPoint Careers{% endblock %}
+
+{% block content %}
+<section class="section-pad">
+    <div class="wrap">
+        <p class="eyebrow"><a href="/careers.html" style="color: var(--np-blue);">← All roles</a> / {{ job.department or "Open role" }}</p>
+        <h1 style="max-width: 18ch; margin-bottom: var(--np-px-5);">{{ job.title }}</h1>
+        <p class="lead" style="max-width: 60ch; font-size: 1.2rem;">{{ job.brief or job.summary or "" }}</p>
+
+        <div class="metrics-grid" style="margin-top: var(--np-px-6); max-width: 880px; background: var(--np-line); border: 1px solid var(--np-line); grid-template-columns: repeat(2, 1fr);">
+            <div class="metric" style="background: var(--np-bg); color: var(--np-text);">
+                <div class="metric-label" style="color: var(--np-text-dim);">DEPARTMENT</div>
+                <div class="metric-value" style="font-size: 1.15rem; color: var(--np-text);">{{ job.department or "—" }}</div>
+            </div>
+            <div class="metric" style="background: var(--np-bg); color: var(--np-text);">
+                <div class="metric-label" style="color: var(--np-text-dim);">TYPE</div>
+                <div class="metric-value" style="font-size: 1.15rem; color: var(--np-blue);">{{ job.employment_type or "Full-time" }}</div>
+            </div>
+            {% if job.reports_to %}
+            <div class="metric" style="background: var(--np-bg); color: var(--np-text);">
+                <div class="metric-label" style="color: var(--np-text-dim);">REPORTS TO</div>
+                <div class="metric-value" style="font-size: 1.15rem; color: var(--np-text);">{{ job.reports_to }}</div>
+            </div>
+            {% endif %}
+            <div class="metric" style="background: var(--np-bg); color: var(--np-text);">
+                <div class="metric-label" style="color: var(--np-text-dim);">LOCATION</div>
+                <div class="metric-value" style="font-size: 1.15rem; color: var(--np-blue);">Perth WA</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-pad" style="background: var(--np-bg-2); border-top: 1px solid var(--np-line); border-bottom: 1px solid var(--np-line);">
+    <div class="wrap-narrow">
+        {% if job.description %}
+        <article class="prose">
+            {{ job.description | markdown }}
+        </article>
+        {% endif %}
+    </div>
+</section>
+
+<section class="cta-banner">
+    <div class="wrap">
+        <div class="cta-banner-inner">
+            <div>
+                <h2>Sound like the right fit?</h2>
+                <p>Submit your CV and a short cover letter. A real human reads every application. Decisions within a week.</p>
+            </div>
+            {% if company_url %}
+            <a href="{{ company_url }}" class="btn btn-cyan btn-arrow cta-banner-btn">Apply via WorkReady</a>
+            {% else %}
+            <a href="/contact.html" class="btn btn-cyan btn-arrow cta-banner-btn">Get in touch</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

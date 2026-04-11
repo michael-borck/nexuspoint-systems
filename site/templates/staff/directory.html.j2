@@ -1,0 +1,27 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Staff directory — NexusPoint Systems{% endblock %}
+
+{% block content %}
+<section class="section-pad">
+    <div class="wrap">
+        <p class="eyebrow">Staff portal / Directory</p>
+        <h1 style="margin-bottom: var(--np-px-5);">Who's who.</h1>
+        <p class="lead" style="font-size: 1.2rem; margin-bottom: var(--np-px-6);">Leadership and operational leads. Click any name to see their profile and start a chat.</p>
+
+        <div class="cap-grid">
+            {% for emp in employees %}
+            <article class="cap">
+                <div class="cap-num">{{ "EMP_%03d"|format(loop.index) }} / {{ (emp.tier or "STAFF")|upper }}</div>
+                <h3 style="font-size: 1.2rem;">{{ emp.name }}</h3>
+                <p style="color: var(--np-blue); font-family: var(--np-font-mono); font-size: 0.75rem; letter-spacing: 0.04em; margin-bottom: var(--np-px-3);">{{ emp.role }}</p>
+                <p style="font-size: 0.9rem;">{{ (emp.background or "")[:160] }}{% if (emp.background or "")|length > 160 %}…{% endif %}</p>
+                <div class="cap-tags">
+                    <span class="cap-tag">chat assistant — coming soon</span>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

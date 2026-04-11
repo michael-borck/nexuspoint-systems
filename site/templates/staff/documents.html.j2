@@ -1,0 +1,39 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Staff documents — NexusPoint Systems{% endblock %}
+
+{% block content %}
+<section class="section-pad">
+    <div class="wrap">
+        <p class="eyebrow">Staff portal / Documents</p>
+        <h1 style="margin-bottom: var(--np-px-5);">Documents & policies.</h1>
+        <p class="lead" style="font-size: 1.2rem; margin-bottom: var(--np-px-6);">Current versions only. Older versions are archived in the document management system.</p>
+
+        {% if docs.support %}
+        <h2 style="margin-top: var(--np-px-6); margin-bottom: var(--np-px-4); font-size: 2rem;">Support guides</h2>
+        <div class="cap-grid">
+            {% for doc in docs.support %}
+            <article class="cap">
+                <div class="cap-num">DOC_S{{ "%02d"|format(loop.index) }} / SUPPORT</div>
+                <h3 style="font-size: 1.2rem;">{{ doc.title }}</h3>
+                <p style="font-size: 0.9rem;">{{ (doc.body or doc.brief or "")[:180] }}{% if (doc.body or doc.brief or "")|length > 180 %}…{% endif %}</p>
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if docs.policy %}
+        <h2 style="margin-top: var(--np-px-8); margin-bottom: var(--np-px-4); font-size: 2rem;">Policies</h2>
+        <div class="cap-grid">
+            {% for doc in docs.policy %}
+            <article class="cap">
+                <div class="cap-num">DOC_P{{ "%02d"|format(loop.index) }} / POLICY</div>
+                <h3 style="font-size: 1.2rem;">{{ doc.title }}</h3>
+                <p style="font-size: 0.9rem;">{{ (doc.body or doc.brief or "")[:180] }}{% if (doc.body or doc.brief or "")|length > 180 %}…{% endif %}</p>
+            </article>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
